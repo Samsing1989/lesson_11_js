@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 3</title>
+  </head>
+
+  <body>
+    <h1>Задача 3</h1>
+    <p>
+      Морський бій. Випадковим чином на двовимірному полі розміром 6*6
+      розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра
+      продовжується поки не потоплено усі кораблі або у користувача не
+      закінчаться снаряди.
+    </p>
+
+    <script>
+      // генерація випадкових чисел
+      function getRandomNUmber(mimValue, maxValue) {
+        return mimValue + Math.floor(Math.random() * (maxValue - mimValue + 1))
+      }
+      // поле гри
+      let playingField = []
+      for (let i = 0; i < 6; i++) {
+        playingField[i] = []
+        for (let j = 0; j < 6; j++) {
+          playingField[i][j] = 8
+        }
+      }
+
+      // разташування кораблів
+      let ships = 0
+      while (ships < 5) {
+        let shipsHorizontally = getRandomNUmber(0, 5)
+        let shipsVertically = getRandomNUmber(0, 5)
+        if (playingField[shipsHorizontally][shipsVertically] !== 1) {
+          playingField[shipsHorizontally][shipsVertically] = 1
+          ships++
+        }
+      }
+      // Цикил гри продовжується до поки не потопляться всі кораблі
+      let shots = 20
+      let ship = 5
+      while (ship > 0 && shots > 0) {
+        let horizontall = parseInt(
+          prompt("Введіть кординату по горизонтальній лінії від 0 - 5")
+        )
+        let vertically = parseInt(
+          prompt("Введіть кординату по вертикальній лінії від 0 - 5")
+        )
+        if (playingField[horizontall][vertically] === 1) {
+          alert("Ви попали")
+
+          ship--
+        } else {
+          alert("Ви промахнулись")
+        }
+        shots--
+      }
+      // Вивіт гри
+      if (ship === 0) alert("Ви перемогли")
+      else alert("Ви програли гру")
+    </script>
+  </body>
+</html>

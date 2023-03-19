@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 1</title>
+  </head>
+
+  <body>
+    <h1>Задача 1</h1>
+    <p>Знайти суми елементів у вказаній області</p>
+    <ol>
+      <li><img src="../img/image_1.png" alt="" /></li>
+      <li><img src="../img/image_2.png" alt="" /></li>
+      <li><img src="../img/image_3.png" alt="" /></li>
+      <li><img src="../img/image_4.png" alt="" /></li>
+      <li>Суму парних рядків</li>
+      <li>Суму непарних стовпців</li>
+      <li>У парних рядках – непарні стовпці, у непарних – парні.</li>
+    </ol>
+
+    <script>
+      let array = [
+        [12, 35, 36, 74],
+        [35, 15, 72, 65],
+        [65, 74, 15, 25],
+        [97, 14, 35, 25],
+      ]
+      //Сума першої картинки
+      let sumFirst = 0
+      for (let i = 0; i < array.length / 2; i++) {
+        for (let j = 0; j <= 1; j++) {
+          sumFirst += array[i][j]
+        }
+      }
+      document.write(`Сума першої картинки - ${sumFirst}<br>`)
+      // Сума другої картинки
+      let sumSecond = 0
+      for (let i = 0; i < array.length / 2; i++) {
+        for (let j = 2; j <= 3; j++) {
+          sumSecond += array[i][j]
+        }
+      }
+      document.write(`Сума другої картинки - ${sumSecond}<br>`)
+      // Сума другої картинки
+      let sumThird = 0
+      for (let i = 2; i < array.length; i++) {
+        for (let j = 0; j <= 1; j++) {
+          sumThird += array[i][j]
+        }
+      }
+      document.write(`Сума третьої картинки - ${sumThird}<br>`)
+      // Сума другої картинки
+      let sumFour = 0
+      for (let i = 2; i < array.length; i++) {
+        for (let j = 2; j <= 3; j++) {
+          sumFour += array[i][j]
+        }
+      }
+      document.write(`Сума четвертої картинки - ${sumFour}<br>`)
+      // Суму парних рядків
+      let sumEvenLines = 0
+      for (let i = 0; i < array.length; i++) {
+        if (i % 2 === 0) {
+          for (let j = 0; j < array[i].length; j++) {
+            sumEvenLines += array[i][j]
+          }
+        }
+      }
+      document.write(`Сума четвертої картинки - ${sumEvenLines}<br>`)
+      // Суму непарних стовпців
+      let sumOddRows = 0
+      for (let i = 0; i < array.length; i++) {
+        if (i % 2 !== 0) {
+          for (let j = 0; j < array[i].length; j++) {
+            sumOddRows += array[i][j]
+          }
+        }
+      }
+      document.write(`Сума четвертої картинки - ${sumOddRows}<br>`)
+      // У парних рядках – непарні стовпці, у непарних – парні.
+      let sumEvenOdd = 0
+      let sumEvenOddTwo = 0
+      for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array[i].length; j++) {
+          if (i % 2 === 0 && j % 2 !== 0) {
+            sumEvenOdd += array[i][j]
+          } else if (i % 2 !== 0 && j % 2 === 0) sumEvenOddTwo += array[i][j]
+        }
+      }
+      document.write(
+        `У парних рядках непарні стовпці - ${sumEvenOdd}, у непарних парні -${sumEvenOddTwo}`
+      )
+    </script>
+  </body>
+</html>

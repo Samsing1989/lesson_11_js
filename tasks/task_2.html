@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zxx">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задача 2</title>
+  </head>
+
+  <body>
+    <h1>Задача 2</h1>
+    <p>Дано інформацію про прибуток К магазинів протягом тижня. Знайти :</p>
+    <li>загальний прибуток кожного масиву за тиждень;</li>
+    <li>
+      загальний прибуток усіх магазинів по дням (загальний прибуток усіх
+      магазинів за понеділок, за вівторок, і т.д.);
+    </li>
+    <li>загальний прибуток за робочі дні</li>
+    <li>загальний прибуток за вихідні дні</li>
+    <li>максимальний прибуток за середу</li>
+    <li>
+      сформувати загальний список (одновимірний масив) зі значенням, які що
+      більші за 200
+    </li>
+    <li>відсортувати кожен тиждень за зростанням</li>
+    <li>
+      відсортувати тижні (рядки) за спаданням максимального елементи у цьому
+      тижні (рядку), тобто при порівнянні рядків потрібно порівнювати
+      максимальні елементи у кожному з цих рядків
+    </li>
+    <li>
+      упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при
+      порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці
+      суми, на основі цих сум буде зрозуміло, який з елементів повинен іти
+      раніше).
+    </li>
+
+    <script>
+      // Ввід клікості магазинів
+      let enterTheNumberOfStores = parseInt(
+        prompt("Введіть кількість магазинів ")
+      )
+      let week = 7
+      // Рандомне число
+      function getRandom(minValue, maxValue) {
+        return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+      }
+      // Генерування одного одновимірного масива
+      function getRandomNumber(dayOfWeek, minValue, maxValue) {
+        const arr = []
+        for (let i = 0; i < dayOfWeek; i++) {
+          const randNumber = getRandom(minValue, maxValue)
+          arr.push(randNumber)
+        }
+        return arr
+      }
+      // Фунція генерування двох вимірного масива
+      function getTableRandom(quantityOfShops, dayOfWeek, minValue, maxValue) {
+        const table = []
+        for (let i = 0; i < quantityOfShops; i++) {
+          const randomTable = getRandomNumber(dayOfWeek, minValue, maxValue)
+          table.push(randomTable)
+        }
+        return table
+      }
+      let arrayWith = getTableRandom(enterTheNumberOfStores, week, 0, 350)
+      for (let i = 0; i < arrayWith.length; i++) {
+        document.write(`Магазин - ${i + 1} : ${arrayWith[i]}<br>`)
+      }
+      //====================================================================
+      //   загальний прибуток кожного масиву за тиждень
+      function getTotalProfitOfEachArrayForTheWeek(tableArr, lengthTable) {
+        let resultTable = []
+        for (let i = 0; i < tableArr.length; i++) {
+          let sum = 0
+          for (let j = 0; j < lengthTable; j++) {
+            sum += tableArr[i][j]
+          }
+          resultTable.push(sum)
+        }
+        return resultTable
+      }
+      let totalProfitOfEachArrayForTheWeek =
+        getTotalProfitOfEachArrayForTheWeek(arrayWith, week)
+      document.write(
+        `загальний прибуток кожного масиву за тиждень - ${totalProfitOfEachArrayForTheWeek} <br>`
+      )
+      // загальний прибуток усіх магазинів по дням (загальний прибуток усіх
+      // магазинів за понеділок, за вівторок, і т.д.);
+      function getInEveryDays(tableArr, lengthTable) {
+        let result = []
+        for (let j = 0; j < lengthTable; j++) {
+          let sum = 0
+          for (let i = 0; i < tableArr.length; i++) {
+            sum += tableArr[i][j]
+          }
+          result.push(sum)
+        }
+        return result
+      }
+      let inEveryDays = getInEveryDays(arrayWith, week)
+      document.write(
+        `Загальний прибуток усіх магазинів по дням - ${inEveryDays} <br>`
+      )
+      // загальний прибуток за робочі дні
+      function getWorkingDays(tableArr, lengthTable) {
+        let result = []
+        for (let j = 0; j < lengthTable - 2; j++) {
+          let sum = 0
+          for (let i = 0; i < tableArr.length; i++) {
+            sum += tableArr[i][j]
+          }
+          result.push(sum)
+        }
+        return result
+      }
+      let workingDays = getWorkingDays(arrayWith, week)
+      document.write(`загальний прибуток за робочі дні - ${workingDays} <br>`)
+      // загальний прибуток за вихідні дні
+      function getWeekendDays(tableArr, lengthTable) {
+        let result = []
+        for (let j = 5; j < lengthTable; j++) {
+          let sum = 0
+          for (let i = 0; i < tableArr.length; i++) {
+            sum += tableArr[i][j]
+          }
+          result.push(sum)
+        }
+        return result
+      }
+      let weekendDays = getWeekendDays(arrayWith, week)
+      document.write(`загальний прибуток за вихідні дні - ${weekendDays} <br>`)
+      // максимальний прибуток за середу
+      function getMaxWednesday(tableArr, lengthTable) {
+        let result = []
+        for (let j = 2; j < lengthTable - 4; j++) {
+          let sum = 0
+          for (let i = 0; i < tableArr.length; i++) {
+            sum += tableArr[i][j]
+          }
+          result.push(sum)
+        }
+        return result
+      }
+      let MaxWednesday = getMaxWednesday(arrayWith, week)
+      document.write(`максимальний прибуток за середу - ${MaxWednesday} <br>`)
+      // сформувати загальний список (одновимірний масив) зі значенням, які що
+      // більші за 200
+      function getWithTheValueOfWhichGreaterThan200(tableArr) {
+        let result = []
+        for (const rowNumber of tableArr) {
+          for (const el of rowNumber) {
+            if (el > 200) {
+              result.push([el])
+            }
+          }
+        }
+        return result
+      }
+      let withTheValueOfWhichGreaterThan200 =
+        getWithTheValueOfWhichGreaterThan200(arrayWith)
+      document.write(
+        `значенням, які що більші за 200 - ${withTheValueOfWhichGreaterThan200} <br>`
+      )
+      // відсортувати кожен тиждень за зростанням
+
+      for (let i = 0; i < arrayWith.length; i++) {
+        arrayWith[i].sort((el1, el2) => el1 - el2)
+        document.write(
+          `відсортувати кожен тиждень за зростанням - магазини ${i + 1}
+        ${arrayWith[i]} <br>`
+        )
+      }
+      //  відсортувати тижні (рядки) за спаданням максимального елементи у цьому
+      // тижні (рядку), тобто при порівнянні рядків потрібно порівнювати
+      // максимальні елементи у кожному з цих рядків
+      for (let i = 0; i < arrayWith.length; i++) {
+        arrayWith[i].sort((el1, el2) => Math.max(el2) - Math.max(el1))
+        document.write(
+          `відсортувати тижні (рядки) за спаданням максимального елементи - магазини ${
+            i + 1
+          }
+        ${arrayWith[i]} <br>`
+        )
+      }
+      // упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при
+      // порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці
+      // суми, на основі цих сум буде зрозуміло, який з елементів повинен іти
+      // раніше).
+      function getSortElSum(tableArr) {
+        tableArr.sort((el1, el2) => {
+          el2.reduce((sum, el) => sum + el) - el1.reduce((sum, el) => sum + el)
+        })
+        return tableArr
+      }
+      let sortElSum = getSortElSum(arrayWith)
+      document.write(
+        ` упорядкувати тижні (рядки) за спаданням суми елементів - магазини
+        ${sortElSum}`
+      )
+    </script>
+  </body>
+</html>
